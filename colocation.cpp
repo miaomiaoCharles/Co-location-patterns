@@ -42,7 +42,6 @@ map<string, Tableins> str_table;   //二阶表实例
 set<string> pcp2;   //二阶频繁模式
 
 
-
 void init_gridGraph(){
 	gridGraph.resize(gridNum);
 	for (int i = 0; i < gridGraph.size(); i++) {
@@ -480,51 +479,12 @@ vector<Instance> getDeg(vector<Instance>& instance){
 	sort(instance.begin(), instance.end(), cmp);
 	return instance;
 }
-
-void MCHT(){
-	vector<int>num_ins;
-	const int len = instance.size();
-	for (int i = 0; i < instance.size(); i++) {
-		num_ins.push_back(i);
-		instance[i].num_MCHT = i;
-	}
-	
-	vector<Instance> deg_oder = getDeg(instance);
-	vector<int> deg_num;
-	for (int i = 0; i < deg_oder.size(); i++) {
-		deg_num.push_back(deg_oder[i].num_MCHT);
-	}
-	
-	for (int i = 0; i < deg_oder.size(); i++) {
-		vector<bool> pre(len), last(len);
-		int index = i;
-		vector<bool> nebol_bool (deg_num.size());
-		for (int j = 0; j < i; j++) {
-			pre[deg_num[j]] = true;
-			
-		}
-		for(int j = i+1; j < len; j++){
-			last[deg_num[j]] = true;
-		}
-		for (int j = 0; j < instance[i].true_neighbor.size(); j++) {
-			nebol_bool[instance[i].true_neighbor[j].num_MCHT] = true;
-		}
-		vector<bool>p(len), x(len);
-		for(int j = 0; j < len; j++){
-			p[j] = last[j]&nebol_bool[j];
-			x[j] = pre[j]&nebol_bool[j];
-		}
-		
-		
-	}
-	
-}
-int main(int argc, char *argv[]) {
-	int begin = clock();
-	gen_pcp2("/Users/mac/Desktop/data1.txt");
-//	partition_based();
-	
-	int end = clock();
-	cout << "程序耗时："  << 1.0*(end - begin)/CLOCKS_PER_SEC << "秒";
-	
-}
+//int main(int argc, char *argv[]) {
+//	int begin = clock();
+//	gen_pcp2("/Users/mac/Desktop/data1.txt");
+////	partition_based();
+//	
+//	int end = clock();
+//	cout << "程序耗时："  << 1.0*(end - begin)/CLOCKS_PER_SEC << "秒";
+//	
+//}
